@@ -1,4 +1,3 @@
-This is a very common and important question. The "Print to PDF" and "Download .txt" buttons work because they are client-side (they run only in the user's browser).
 
 Sending an email automatically is a server-side action. For security reasons, a browser (running your HTML/JS) cannot directly send an email. It would be a huge spam risk.
 
