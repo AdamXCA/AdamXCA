@@ -39,13 +39,12 @@
             gap: 20px;
         }
 
-        /* This is the floating navigator on the right */
         #quiz-nav {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            position: sticky; /* This makes it float */
-            top: 30px; /* Sits 30px from the top */
+            position: sticky; 
+            top: 30px; 
             height: fit-content;
             width: 100px; 
             flex-shrink: 0;
@@ -144,7 +143,6 @@
             width: 100%;
         }
 
-        /* Styles for Name/Email inputs */
         .form-group {
             margin-bottom: 20px;
         }
@@ -163,7 +161,7 @@
             color: var(--text-primary);
             border-radius: 6px;
             font-size: 1em;
-            box-sizing: border-box; /* Important */
+            box-sizing: border-box; 
         }
         .form-group input[type="text"]:focus,
         .form-group input[type="email"]:focus {
@@ -270,7 +268,6 @@
             box-shadow: 0 8px 20px rgba(0, 122, 255, 0.25);
         }
 
-        /* --- Results Section --- */
         #results {
             margin: 0 40px 40px 40px;
             padding: 30px;
@@ -285,7 +282,6 @@
             color: var(--text-primary);
         }
 
-        /* Styles for Results Cards */
         #results-content h2 {
             text-align: center;
             color: #fff;
@@ -307,13 +303,11 @@
             margin-bottom: 0;
             color: var(--text-secondary);
         }
-        /* Make the first result card stand out */
         .result-card:first-of-type {
-            border-left-color: #33ff99; /* A bright green for #1 */
+            border-left-color: #33ff99; 
             background: #2f4a3e;
         }
 
-        /* Styles for printed user info */
         .user-info-print {
             background: var(--option-bg);
             padding: 15px;
@@ -361,7 +355,6 @@
             }
         }
 
-        /* This moves the right-side nav to the top on mobile */
         @media (max-width: 1000px) {
             .main-layout {
                 flex-direction: column-reverse; 
@@ -460,18 +453,6 @@
 
             <form id="careerQuizForm">
                 
-                <fieldset>
-                    <legend>👤 Your Information (Optional)</legend>
-                    <div class="form-group">
-                        <label for="user_name">Name</label>
-                        <input type="text" id="user_name" name="user_name" placeholder="e.g., Jane Doe">
-                    </div>
-                    <div class="form-group">
-                        <label for="user_email">Email</label>
-                        <input type="email" id="user_email" name="user_email" placeholder="e.g., jane.doe@example.com">
-                    </div>
-                </fieldset>
-
                 <fieldset>
                     <legend>🧩 Section 1: Real-World Scenarios</legend>
                     
@@ -666,3 +647,311 @@
                             <input type="radio" id="q15_1" name="q15" value="1" data-answer-text="I'm not sure"><label for="q15_1">I'm not sure</label>
                         </div>
                     </div>
+
+                    <div class="question-block" id="q-block-16" data-q-num="16">
+                        <p class="question-text">16. How interested are you in thinking about how AI and data will change different jobs and industries in the future?</p>
+                        <p class="hint">This strategic thinking is key for "Analysts," "Consultants," and <a href="#" title="Learn more about AI Policy" onclick="return false;">AI Policy</a> roles.</p>
+                        <div class="options-container">
+                            <input type="radio" id="q16_5" name="q16" value="5" data-answer-text="Strongly Interested"><label for="q16_5">Strongly Interested</label>
+                            <input type="radio" id="q16_4" name="q16" value="4" data-answer-text="Interested"><label for="q16_4">Interested</label>
+                            <input type="radio" id="q16_3" name="q16" value="3" data-answer-text="Neutral"><label for="q16_3">Neutral</label>
+                            <input type="radio" id="q16_2" name="q16" value="2" data-answer-text="Not Very Interested"><label for="q16_2">Not Very Interested</label>
+                            <input type="radio" id="q16_1" name="q16" value="1" data-answer-text="I'm not sure"><label for="q16_1">I'm not sure</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>🚀 Section 5: Future Aspirations</legend>
+
+                    <div class="question-block" id="q-block-17" data-q-num="17">
+                        <p class="question-text">17. How interested are you in *leading a team* that uses data to make smart business decisions?</p>
+                        <p class="hint"><strong>Example roles:</strong> Analytics Manager, Data-driven Product Manager.</p>
+                        <div class="options-container">
+                            <input type="radio" id="q17_5" name="q17" value="5" data-answer-text="Strongly Interested"><label for="q17_5">Strongly Interested</label>
+                            <input type="radio" id="q17_4" name="q17" value="4" data-answer-text="Interested"><label for="q17_4">Interested</label>
+                            <input type="radio" id="q17_3" name="q17" value="3" data-answer-text="Neutral"><label for="q17_3">Neutral</label>
+                            <input type="radio" id="q17_2" name="q17" value="2" data-answer-text="Not Very Interested"><label for="q17_2">Not Very Interested</label>
+                            <input type="radio" id="q17_1" name="q17" value="1" data-answer-text="I'm not sure"><label for="q17_1">I'm not sure</label>
+                        </div>
+                    </div>
+
+                    <div class="question-block" id="q-block-18" data-q-num="18">
+                        <p class="question-text">18. How interested are you in *building and training* the complex AI models from scratch (like the ones that power ChatGPT)?</p>
+                        <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Machine Learning Engineers" onclick="return false;">Machine Learning Engineer</a>, AI Research Scientist.</p>
+                        <div class="options-container">
+                            <input type="radio" id="q18_5" name="q18" value="5" data-answer-text="Strongly Interested"><label for="q18_5">Strongly Interested</label>
+                            <input type="radio" id="q18_4" name="q18" value="4" data-answer-text="Interested"><label for="q18_4">Interested</label>
+                            <input type="radio" id="q18_3" name="q18" value="3" data-answer-text="Neutral"><label for="q18_3">Neutral</label>
+                            <input type="radio" id="q18_2" name="q18" value="2" data-answer-text="Not Very Interested"><label for="q18_2">Not Very Interested</label>
+                            <input type="radio" id="q18_1" name="q18" value="1" data-answer-text="I'm not sure"><label for="q18_1">I'm not sure</label>
+                        </div>
+                    </div>
+
+                    <div class="question-block" id="q-block-19" data-q-num="19">
+                        <p class="question-text">19. How interested are you in *designing the massive systems* that handle data for companies like YouTube or TikTok?</p>
+                        <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Engineers" onclick="return false;">Data Engineer</a>, Cloud Engineer.</p>
+                        <div class="options-container">
+                            <input type="radio" id="q19_5" name="q19" value="5" data-answer-text="Strongly Interested"><label for="q19_5">Strongly Interested</label>
+                            <input type="radio" id="q19_4" name="q19" value="4" data-answer-text="Interested"><label for="q19_4">Interested</label>
+                            <input type="radio" id="q19_3" name="q19" value="3" data-answer-text="Neutral"><label for="q19_3">Neutral</label>
+                            <input type="radio" id="q19_2" name="q19" value="2" data-answer-text="Not Very Interested"><label for="q19_2">Not Very Interested</label>
+                            <input type="radio" id="q19_1" name="q19" value="1" data-answer-text="I'm not sure"><label for="q19_1">I'm not sure</label>
+                        </div>
+                    </div>
+
+                    <div class="question-block" id="q-block-20" data-q-num="20">
+                        <p class="question-text">20. How interested are you in *translating complex data* into simple stories and visuals (dashboards) that anyone can understand?</p>
+                        <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Analysts" onclick="return false;">Data Analyst</a>, Business Intelligence (BI) Developer.</p>
+                        <div class="options-container">
+                            <input type="radio" id="q20_5" name="q20" value="5" data-answer-text="Strongly Interested"><label for="q20_5">Strongly Interested</label>
+                            <input type="radio" id="q20_4" name="q20" value="4" data-answer-text="Interested"><label for="q20_4">Interested</label>
+                            <input type="radio" id="q20_3" name="q20" value="3" data-answer-text="Neutral"><label for="q20_3">Neutral</label>
+                            <input type="radio" id="q20_2" name="q20" value="2" data-answer-text="Not Very Interested"><label for="q20_2">Not Very Interested</label>
+                            <input type="radio" id="q20_1" name="q20" value="1" data-answer-text="I'm not sure"><label for="q20_1">I'm not sure</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>👤 Your Information TO receive a report to your email</legend>
+                    <div class="form-group">
+                        <label for="user_name">Name</label>
+                        <input type="text" id="user_name" name="user_name" placeholder="e.g., Jane Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_email">Email</label>
+                        <input type="email" id="user_email" name="user_email" placeholder="e.g., jane.doe@example.com">
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="submit-button">Discover Your Career Fit!</button>
+
+            </form>
+
+            <div id="results">
+                <div id="results-content"></div> 
+                
+                <div class="results-actions">
+                    <button id="printButton" class="result-button print">Print Results (as PDF)</button>
+                    <button id="downloadButton" class="result-button download">Download Answers (.txt)</button>
+                </div>
+            </div>
+
+        </div> </div> <script>
+        const form = document.getElementById('careerQuizForm');
+        const progressBar = document.getElementById('progressBar');
+        const totalQuestions = 20;
+        const navContainer = document.getElementById('quiz-nav');
+
+        // --- Initialize the Question Navigator ---
+        function initQuizNav() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const dot = document.createElement('a');
+                dot.id = `nav-dot-${i}`;
+                dot.classList.add('nav-dot');
+                dot.href = `#q-block-${i}`;
+                dot.innerText = i;
+                dot.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                });
+                navContainer.appendChild(dot);
+            }
+        }
+
+        // --- Update progress bar AND nav dots ---
+        function updateTracking() {
+            const checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
+            const answeredNames = new Set(Array.from(checkedRadios).map(radio => radio.name));
+
+            const progress = (answeredNames.size / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const dot = document.getElementById(`nav-dot-${i}`);
+                if (answeredNames.has(`q${i}`)) {
+                    dot.classList.add('answered');
+                } else {
+                    dot.classList.remove('answered');
+                }
+            }
+            
+            document.querySelectorAll('.missing-highlight').forEach(el => el.classList.remove('missing-highlight'));
+            document.querySelectorAll('.nav-dot.missing').forEach(el => el.classList.remove('missing'));
+
+            return answeredNames;
+        }
+
+        // --- Initialize Nav on Page Load ---
+        document.addEventListener('DOMContentLoaded', initQuizNav);
+
+        // --- Update tracking on any change ---
+        form.addEventListener('change', updateTracking);
+
+        // --- Handle form submission ---
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const answeredNames = updateTracking(); 
+            
+            if (answeredNames.size < totalQuestions) {
+                alert('Please answer all 20 questions. Missing questions have been highlighted in red.');
+                
+                let firstMissingId = null;
+                for (let i = 1; i <= totalQuestions; i++) {
+                    if (!answeredNames.has(`q${i}`)) {
+                        document.getElementById(`nav-dot-${i}`).classList.add('missing');
+                        const qBlock = document.getElementById(`q-block-${i}`);
+                        qBlock.classList.add('missing-highlight');
+                        
+                        if (!firstMissingId) {
+                            firstMissingId = `q-block-${i}`;
+                        }
+                    }
+                }
+                
+                document.getElementById(firstMissingId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return; 
+            }
+
+            // --- THIS IS THE SCORING LOGIC THAT REPLACES THE PLACEHOLDER ---
+            const scores = {
+                dataAnalyst: 0,
+                mlEngineer: 0,
+                dataEngineer: 0,
+                aiStrategist: 0
+            };
+
+            const roleDetails = {
+                dataAnalyst: { name: 'Data Analyst', desc: 'You like finding insights and telling stories with data. You focus on business problems and practical answers using tools like Excel, SQL, and Power BI.' },
+                mlEngineer: { name: 'Machine Learning Engineer', desc: 'You are curious about building the AI models themselves. You enjoy coding (like Python) and are interested in how Netflix or ChatGPT work under the hood.' },
+                dataEngineer: { name: 'Data Engineer', desc: 'You are interested in building the "plumbing" and massive systems that collect and move data reliably, like the infrastructure for self-driving cars or TikTok.' },
+                aiStrategist: { name: 'AI Strategist / Product Manager', desc: 'You focus on the "big picture," ethics, and business strategy. You enjoy thinking about how AI can solve problems and impact jobs, leading teams to make better decisions.' }
+            };
+
+            const formData = new FormData(form);
+            const getScore = (qName) => parseInt(formData.get(qName)) || 0;
+
+            // Score Mapping
+            scores.dataAnalyst += getScore('q2') + getScore('q9') + getScore('q15') + getScore('q20');
+            scores.mlEngineer += getScore('q1') + getScore('q5') + getScore('q6') + getScore('q7') + getScore('18');
+            scores.dataEngineer += getScore('q3') + getScore('q12') + getScore('q19');
+            scores.aiStrategist += getScore('q8') + getScore('q14') + getScore('q16') + getScore('q17');
+            
+            // General Skills
+            const codingScore = getScore('q10');
+            scores.dataAnalyst += codingScore;
+            scores.mlEngineer += codingScore;
+            scores.dataEngineer += codingScore;
+
+            const projectScore = getScore('q13');
+            scores.dataAnalyst += projectScore;
+            scores.mlEngineer += projectScore;
+            scores.dataEngineer += projectScore;
+
+            scores.aiStrategist += getScore('q11'); // AI Literacy
+            
+            const socialGoodScore = getScore('q4');
+            scores.dataAnalyst += socialGoodScore;
+            scores.aiStrategist += socialGoodScore;
+
+            // Sort scores
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+            // --- Generate HTML for results ---
+            const resultsContent = document.getElementById('results-content');
+            const userName = document.getElementById('user_name').value;
+            const userEmail = document.getElementById('user_email').value;
+
+            let resultsHTML = '';
+
+            // Add user info to the results if provided
+            if (userName || userEmail) {
+                resultsHTML += '<div class="user-info-print">';
+                if (userName) resultsHTML += `<p><strong>Name:</strong> ${userName}</p>`;
+                if (userEmail) resultsHTML += `<p><strong>Email:</strong> ${userEmail}</p>`;
+                resultsHTML += '</div>';
+            }
+
+            resultsHTML += '<h2>Your Top Career Matches</h2>';
+            
+            for (const [key, score] of sortedScores) {
+                resultsHTML += `
+                    <div class="result-card">
+                        <h3>${roleDetails[key].name}</h3>
+                        <p>${roleDetails[key].desc}</p>
+                    </div>
+                `;
+            }
+            resultsHTML += '<p style="margin-top: 25px; text-align: center; color: var(--text-secondary);">You can now save your full report (including all your answers) below.</p>';
+            
+            // Set the generated HTML
+            resultsContent.innerHTML = resultsHTML;
+            // --- End Scoring Logic ---
+
+            // Show the results section
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // --- Event Listeners for Save/Print Buttons ---
+        document.getElementById('printButton').addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            let textContent = "AI & Data Career Fit Quiz Results\n";
+            textContent += "==================================\n\n";
+
+            // Add user info
+            const userName = document.getElementById('user_name').value || 'Not provided';
+            const userEmail = document.getElementById('user_email').value || 'Not provided';
+            textContent += `Name: ${userName}\n`;
+            textContent += `Email: ${userEmail}\n\n`;
+
+            // Add summary results
+            textContent += "--- Your Top Matches ---\n";
+            const resultsHTML = document.getElementById('results-content').querySelectorAll('.result-card');
+            resultsHTML.forEach(card => {
+                const title = card.querySelector('h3').innerText;
+                const desc = card.querySelector('p').innerText;
+                textContent += `${title}:\n${desc}\n\n`;
+            });
+
+            textContent += "--- Your Full Answers ---\n";
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qName = `q${i}`;
+                const qBlock = document.getElementById(`q-block-${i}`);
+                const qText = qBlock.querySelector('.question-text').innerText;
+                
+                const selectedRadio = document.querySelector(`input[name="${qName}"]:checked`);
+                let answerText = "No answer";
+                if (selectedRadio) {
+                    answerText = selectedRadio.getAttribute('data-answer-text');
+                }
+                
+                textContent += `${qText}\n`;
+                textContent += `Your Answer: ${answerText}\n\n`;
+            }
+            
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const a = document.createElement('a');
+            const timestamp = new Date().toISOString().slice(0, 10);
+            
+            a.href = URL.createObjectURL(blob);
+            a.download = `ai_quiz_results_${timestamp}.txt`;
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        });
+    </script>
+
+</body>
+</html>
