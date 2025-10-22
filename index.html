@@ -133,7 +133,6 @@
             margin-top: 20px;
         }
         
-        /* Hide the actual radio button */
         .options-container input[type="radio"] {
             display: none;
         }
@@ -153,8 +152,7 @@
             border-color: var(--primary-blue);
             background-color: #4a4d55;
         }
-
-        /* This is the magic: style the label when its radio is checked */
+        
         .options-container input[type="radio"]:checked + label {
             background-color: var(--primary-blue);
             border-color: var(--primary-blue);
@@ -187,17 +185,101 @@
             transform: translateY(0);
         }
 
+        /* --- NEW: Results Section --- */
         #results {
             margin: 0 40px 40px 40px;
             padding: 30px;
-            background-color: #e6f7ff;
-            border: 1px solid #b3e0ff;
+            background-color: #3a3d45; /* Lightened card color */
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             text-align: center;
+            display: none; /* Hidden by default */
+        }
+        #results-content {
             font-size: 1.2em;
             font-weight: 600;
-            color: #0056b3;
-            display: none; /* Hidden by default */
+            color: var(--text-primary);
+        }
+
+        .results-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .result-button {
+            padding: 12px 20px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .result-button.print {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .result-button.print:hover {
+            background-color: #ccc;
+        }
+        .result-button.download {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        .result-button.download:hover {
+            background-color: var(--primary-blue-dark);
+        }
+
+        @media (min-width: 600px) {
+            .results-actions {
+                flex-direction: row;
+            }
+        }
+
+        /* --- NEW: Print Styles --- */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                margin: 0;
+                max-width: 100%;
+                border-radius: 0;
+            }
+            /* Hide everything except the header and results */
+            #careerQuizForm, .progress-container, .results-actions, .submit-button {
+                display: none !important;
+            }
+            #results {
+                display: block !important; /* Ensure it's visible */
+                background-color: #fff !important;
+                color: #000 !important;
+                border: none !important;
+                margin: 0;
+                padding: 0 40px;
+            }
+            .header {
+                padding-bottom: 0;
+            }
+            h1 {
+                color: #000 !important;
+                background: none !important;
+                -webkit-text-fill-color: initial !important;
+            }
+            .instructions {
+                color: #444;
+            }
+            #results-content {
+                color: #000;
+                text-align: left;
+            }
         }
     </style>
 </head>
@@ -219,51 +301,51 @@
             <fieldset>
                 <legend>🧩 Section 1: Real-World Scenarios</legend>
                 
-                <div class="question-block">
+                <div class="question-block" data-q-num="1">
                     <p class="question-text">1. How interesting do you find the idea of how Netflix recommends movies or Spotify creates personalized playlists?</p>
-                    <p class="hint">This involves <a href="#" title="Learn more about Recommendation Systems">Recommendation Systems</a>, which use data to predict what you'll like.</p>
+                    <p class="hint">This involves <a href="#" title="Learn more about Recommendation Systems" onclick="return false;">Recommendation Systems</a>, which use data to predict what you'll like.</p>
                     <div class="options-container">
-                        <input type="radio" id="q1_5" name="q1" value="5"><label for="q1_5">Strongly Interested</label>
-                        <input type="radio" id="q1_4" name="q1" value="4"><label for="q1_4">Interested</label>
-                        <input type="radio" id="q1_3" name="q1" value="3"><label for="q1_3">Neutral</label>
-                        <input type="radio" id="q1_2" name="q1" value="2"><label for="q1_2">Not Very Interested</label>
-                        <input type="radio" id="q1_1" name="q1" value="1"><label for="q1_1">I'm not sure</label>
+                        <input type="radio" id="q1_5" name="q1" value="5" data-answer-text="Strongly Interested"><label for="q1_5">Strongly Interested</label>
+                        <input type="radio" id="q1_4" name="q1" value="4" data-answer-text="Interested"><label for="q1_4">Interested</label>
+                        <input type="radio" id="q1_3" name="q1" value="3" data-answer-text="Neutral"><label for="q1_3">Neutral</label>
+                        <input type="radio" id="q1_2" name="q1" value="2" data-answer-text="Not Very Interested"><label for="q1_2">Not Very Interested</label>
+                        <input type="radio" id="q1_1" name="q1" value="1" data-answer-text="I'm not sure"><label for="q1_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="2">
                     <p class="question-text">2. How interesting do you find analyzing business data (like sales or marketing reports) to help a company improve performance?</p>
-                    <p class="hint">This is the core of <a href="#" title="Learn more about Business Intelligence">Business Intelligence</a>, often using tools like Power BI or Tableau.</p>
+                    <p class="hint">This is the core of <a href="#" title="Learn more about Business Intelligence" onclick="return false;">Business Intelligence</a>, often using tools like Power BI or Tableau.</p>
                     <div class="options-container">
-                        <input type="radio" id="q2_5" name="q2" value="5"><label for="q2_5">Strongly Interested</label>
-                        <input type="radio" id="q2_4" name="q2" value="4"><label for="q2_4">Interested</label>
-                        <input type="radio" id="q2_3" name="q2" value="3"><label for="q2_3">Neutral</label>
-                        <input type="radio" id="q2_2" name="q2" value="2"><label for="q2_2">Not Very Interested</label>
-                        <input type="radio" id="q2_1" name="q2" value="1"><label for="q2_1">I'm not sure</label>
+                        <input type="radio" id="q2_5" name="q2" value="5" data-answer-text="Strongly Interested"><label for="q2_5">Strongly Interested</label>
+                        <input type="radio" id="q2_4" name="q2" value="4" data-answer-text="Interested"><label for="q2_4">Interested</label>
+                        <input type="radio" id="q2_3" name="q2" value="3" data-answer-text="Neutral"><label for="q2_3">Neutral</label>
+                        <input type="radio" id="q2_2" name="q2" value="2" data-answer-text="Not Very Interested"><label for="q2_2">Not Very Interested</label>
+                        <input type="radio" id="q2_1" name="q2" value="1" data-answer-text="I'm not sure"><label for="q2_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="3">
                     <p class="question-text">3. How interesting is the technology behind a self-driving car (like a Tesla) using sensors and AI to make real-time decisions?</p>
-                    <p class="hint">This combines AI, Robotics, and <a href="#" title="Learn more about Data Engineering">Data Engineering</a> to process massive amounts of data instantly.</p>
+                    <p class="hint">This combines AI, Robotics, and <a href="#" title="Learn more about Data Engineering" onclick="return false;">Data Engineering</a> to process massive amounts of data instantly.</p>
                     <div class="options-container">
-                        <input type="radio" id="q3_5" name="q3" value="5"><label for="q3_5">Strongly Interested</label>
-                        <input type="radio" id="q3_4" name="q3" value="4"><label for="q3_4">Interested</label>
-                        <input type="radio" id="q3_3" name="q3" value="3"><label for="q3_3">Neutral</label>
-                        <input type="radio" id="q3_2" name="q3" value="2"><label for="q3_2">Not Very Interested</label>
-                        <input type="radio" id="q3_1" name="q3" value="1"><label for="q3_1">I'm not sure</label>
+                        <input type="radio" id="q3_5" name="q3" value="5" data-answer-text="Strongly Interested"><label for="q3_5">Strongly Interested</label>
+                        <input type="radio" id="q3_4" name="q3" value="4" data-answer-text="Interested"><label for="q3_4">Interested</label>
+                        <input type="radio" id="q3_3" name="q3" value="3" data-answer-text="Neutral"><label for="q3_3">Neutral</label>
+                        <input type="radio" id="q3_2" name="q3" value="2" data-answer-text="Not Very Interested"><label for="q3_2">Not Very Interested</label>
+                        <input type="radio" id="q3_1" name="q3" value="1" data-answer-text="I'm not sure"><label for="q3_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="4">
                     <p class="question-text">4. How interesting do you find exploring public data (like health stats or city budgets) to find patterns that could help society?</p>
-                    <p class="hint">This is often called <a href="#" title="Learn more about Data for Good">"Data for Good"</a> or "Policy Analysis," using data to make an impact.</p>
+                    <p class="hint">This is often called <a href="#" title="Learn more about Data for Good" onclick="return false;">"Data for Good"</a> or "Policy Analysis," using data to make an impact.</p>
                     <div class="options-container">
-                        <input type="radio" id="q4_5" name="q4" value="5"><label for="q4_5">Strongly Interested</label>
-                        <input type="radio" id="q4_4" name="q4" value="4"><label for="q4_4">Interested</label>
-                        <input type="radio" id="q4_3" name="q4" value="3"><label for="q4_3">Neutral</label>
-                        <input type="radio" id="q4_2" name="q4" value="2"><label for="q4_2">Not Very Interested</label>
-                        <input type="radio" id="q4_1" name="q4" value="1"><label for="q4_1">I'm not sure</label>
+                        <input type="radio" id="q4_5" name="q4" value="5" data-answer-text="Strongly Interested"><label for="q4_5">Strongly Interested</label>
+                        <input type="radio" id="q4_4" name="q4" value="4" data-answer-text="Interested"><label for="q4_4">Interested</label>
+                        <input type="radio" id="q4_3" name="q4" value="3" data-answer-text="Neutral"><label for="q4_3">Neutral</label>
+                        <input type="radio" id="q4_2" name="q4" value="2" data-answer-text="Not Very Interested"><label for="q4_2">Not Very Interested</label>
+                        <input type="radio" id="q4_1" name="q4" value="1" data-answer-text="I'm not sure"><label for="q4_1">I'm not sure</label>
                     </div>
                 </div>
             </fieldset>
@@ -271,51 +353,51 @@
             <fieldset>
                 <legend>🧠 Section 2: AI & Its Impact</legend>
                 
-                <div class="question-block">
+                <div class="question-block" data-q-num="5">
                     <p class="question-text">5. How interested are you in *how* AI like ChatGPT or Gemini can write essays, answer questions, and generate code?</p>
-                    <p class="hint">This is the world of <a href="#" title="Learn more about Large Language Models (LLMs)">Large Language Models (LLMs)</a>, a key part of Generative AI.</p>
+                    <p class="hint">This is the world of <a href="#" title="Learn more about Large Language Models (LLMs)" onclick="return false;">Large Language Models (LLMs)</a>, a key part of Generative AI.</p>
                     <div class="options-container">
-                        <input type="radio" id="q5_5" name="q5" value="5"><label for="q5_5">Strongly Interested</label>
-                        <input type="radio" id="q5_4" name="q5" value="4"><label for="q5_4">Interested</label>
-                        <input type="radio" id="q5_3" name="q5" value="3"><label for="q5_3">Neutral</label>
-                        <input type="radio" id="q5_2" name="q5" value="2"><label for="q5_2">Not Very Interested</label>
-                        <input type="radio" id="q5_1" name="q5" value="1"><label for="q5_1">I'm not sure</label>
+                        <input type="radio" id="q5_5" name="q5" value="5" data-answer-text="Strongly Interested"><label for="q5_5">Strongly Interested</label>
+                        <input type="radio" id="q5_4" name="q5" value="4" data-answer-text="Interested"><label for="q5_4">Interested</label>
+                        <input type="radio" id="q5_3" name="q5" value="3" data-answer-text="Neutral"><label for="q5_3">Neutral</label>
+                        <input type="radio" id="q5_2" name="q5" value="2" data-answer-text="Not Very Interested"><label for="q5_2">Not Very Interested</label>
+                        <input type="radio" id="q5_1" name="q5" value="1" data-answer-text="I'm not sure"><label for="q5_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="6">
                     <p class="question-text">6. How interesting do you find AI that can create brand-new images, logos, or music from a text description (like Midjourney or DALL-E)?</p>
-                    <p class="hint">This is also <a href="#" title="Learn more about Generative AI">Generative AI</a>, focusing on creativity and digital content.</p>
+                    <p class="hint">This is also <a href="#" title="Learn more about Generative AI" onclick="return false;">Generative AI</a>, focusing on creativity and digital content.</p>
                     <div class="options-container">
-                        <input type="radio" id="q6_5" name="q6" value="5"><label for="q6_5">Strongly Interested</label>
-                        <input type="radio" id="q6_4" name="q6" value="4"><label for="q6_4">Interested</label>
-                        <input type="radio" id="q6_3" name="q6" value="3"><label for="q6_3">Neutral</label>
-                        <input type="radio" id="q6_2" name="q6" value="2"><label for="q6_2">Not Very Interested</label>
-                        <input type="radio" id="q6_1" name="q6" value="1"><label for="q6_1">I'm not sure</label>
+                        <input type="radio" id="q6_5" name="q6" value="5" data-answer-text="Strongly Interested"><label for="q6_5">Strongly Interested</label>
+                        <input type="radio" id="q6_4" name="q6" value="4" data-answer-text="Interested"><label for="q6_4">Interested</label>
+                        <input type="radio" id="q6_3" name="q6" value="3" data-answer-text="Neutral"><label for="q6_3">Neutral</label>
+                        <input type="radio" id="q6_2" name="q6" value="2" data-answer-text="Not Very Interested"><label for="q6_2">Not Very Interested</label>
+                        <input type="radio" id="q6_1" name="q6" value="1" data-answer-text="I'm not sure"><label for="q6_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="7">
                     <p class="question-text">7. How interested are you in using data to predict future trends (e.g., what Amazon will sell most of next month)?</p>
-                    <p class="hint">This is <a href="#" title="Learn more about Predictive Analytics">Predictive Analytics</a>, a core part of <a href="#" title="Learn more about Machine Learning">Machine Learning</a>.</p>
+                    <p class="hint">This is <a href="#" title="Learn more about Predictive Analytics" onclick="return false;">Predictive Analytics</a>, a core part of <a href="#" title="Learn more about Machine Learning" onclick="return false;">Machine Learning</a>.</p>
                     <div class="options-container">
-                        <input type="radio" id="q7_5" name="q7" value="5"><label for="q7_5">Strongly Interested</label>
-                        <input type="radio" id="q7_4" name="q7" value="4"><label for="q7_4">Interested</label>
-                        <input type="radio" id="q7_3" name="q7" value="3"><label for="q7_3">Neutral</label>
-                        <input type="radio" id="q7_2" name="q7" value="2"><label for="q7_2">Not Very Interested</label>
-                        <input type="radio" id="q7_1" name="q7" value="1"><label for="q7_1">I'm not sure</label>
+                        <input type="radio" id="q7_5" name="q7" value="5" data-answer-text="Strongly Interested"><label for="q7_5">Strongly Interested</label>
+                        <input type="radio" id="q7_4" name="q7" value="4" data-answer-text="Interested"><label for="q7_4">Interested</label>
+                        <input type="radio" id="q7_3" name="q7" value="3" data-answer-text="Neutral"><label for="q7_3">Neutral</label>
+                        <input type="radio" id="q7_2" name="q7" value="2" data-answer-text="Not Very Interested"><label for="q7_2">Not Very Interested</label>
+                        <input type="radio" id="q7_1" name="q7" value="1" data-answer-text="I'm not sure"><label for="q7_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="8">
                     <p class="question-text">8. How interested are you in discussing the rules and ethics of AI (e.g., fairness, privacy, and its impact on jobs)?</p>
-                    <p class="hint">This is a growing field known as <a href="#" title="Learn more about AI Ethics">AI Ethics & Governance</a> or "Responsible AI."</p>
+                    <p class="hint">This is a growing field known as <a href="#" title="Learn more about AI Ethics" onclick="return false;">AI Ethics & Governance</a> or "Responsible AI."</p>
                     <div class="options-container">
-                        <input type="radio" id="q8_5" name="q8" value="5"><label for="q8_5">Strongly Interested</label>
-                        <input type="radio" id="q8_4" name="q8" value="4"><label for="q8_4">Interested</label>
-                        <input type="radio" id="q8_3" name="q8" value="3"><label for="q8_3">Neutral</label>
-                        <input type="radio" id="q8_2" name="q8" value="2"><label for="q8_2">Not Very Interested</label>
-                        <input type="radio" id="q8_1" name="q8" value="1"><label for="q8_1">I'm not sure</label>
+                        <input type="radio" id="q8_5" name="q8" value="5" data-answer-text="Strongly Interested"><label for="q8_5">Strongly Interested</label>
+                        <input type="radio" id="q8_4" name="q8" value="4" data-answer-text="Interested"><label for="q8_4">Interested</label>
+                        <input type="radio" id="q8_3" name="q8" value="3" data-answer-text="Neutral"><label for="q8_3">Neutral</label>
+                        <input type="radio" id="q8_2" name="q8" value="2" data-answer-text="Not Very Interested"><label for="q8_2">Not Very Interested</label>
+                        <input type="radio" id="q8_1" name="q8" value="1" data-answer-text="I'm not sure"><label for="q8_1">I'm not sure</label>
                     </div>
                 </div>
             </fieldset>
@@ -323,51 +405,51 @@
             <fieldset>
                 <legend>🧰 Section 3: Skills & Tools</legend>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="9">
                     <p class="question-text">9. How interested are you in becoming very comfortable with tools like Excel or Google Sheets to organize and analyze data?</p>
-                    <p class="hint">Spreadsheets are the foundation for almost all <a href="#" title="Learn more about Data Analysis">Data Analysis</a>.</p>
+                    <p class="hint">Spreadsheets are the foundation for almost all <a href="#" title="Learn more about Data Analysis" onclick="return false;">Data Analysis</a>.</p>
                     <div class="options-container">
-                        <input type="radio" id="q9_5" name="q9" value="5"><label for="q9_5">Strongly Interested</label>
-                        <input type="radio" id="q9_4" name="q9" value="4"><label for="q9_4">Interested</label>
-                        <input type="radio" id="q9_3" name="q9" value="3"><label for="q9_3">Neutral</label>
-                        <input type="radio" id="q9_2" name="q9" value="2"><label for="q9_2">Not Very Interested</label>
-                        <input type="radio" id="q9_1" name="q9" value="1"><label for="q9_1">I'm not sure</label>
+                        <input type="radio" id="q9_5" name="q9" value="5" data-answer-text="Strongly Interested"><label for="q9_5">Strongly Interested</label>
+                        <input type="radio" id="q9_4" name="q9" value="4" data-answer-text="Interested"><label for="q9_4">Interested</label>
+                        <input type="radio" id="q9_3" name="q9" value="3" data-answer-text="Neutral"><label for="q9_3">Neutral</label>
+                        <input type="radio" id="q9_2" name="q9" value="2" data-answer-text="Not Very Interested"><label for="q9_2">Not Very Interested</label>
+                        <input type="radio" id="q9_1" name="q9" value="1" data-answer-text="I'm not sure"><label for="q9_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="10">
                     <p class="question-text">10. How interested are you in learning a coding language (like Python or SQL) to manage and analyze large amounts of data?</p>
-                    <p class="hint"><a href="#" title="Learn more about SQL">SQL</a> is for "talking" to databases; <a href="#" title="Learn more about Python">Python</a> is for complex analysis and building AI models.</p>
+                    <p class="hint"><a href="#" title="Learn more about SQL" onclick="return false;">SQL</a> is for "talking" to databases; <a href="#" title="Learn more about Python" onclick="return false;">Python</a> is for complex analysis and building AI models.</p>
                     <div class="options-container">
-                        <input type="radio" id="q10_5" name="q10" value="5"><label for="q10_5">Strongly Interested</label>
-                        <input type="radio" id="q10_4" name="q10" value="4"><label for="q10_4">Interested</label>
-                        <input type="radio" id="q10_3" name="q10" value="3"><label for="q10_3">Neutral</label>
-                        <input type="radio" id="q10_2" name="q10" value="2"><label for="q10_2">Not Very Interested</label>
-                        <input type="radio" id="q10_1" name="q10" value="1"><label for="q10_1">I'm not sure</label>
+                        <input type="radio" id="q10_5" name="q10" value="5" data-answer-text="Strongly Interested"><label for="q10_5">Strongly Interested</label>
+                        <input type="radio" id="q10_4" name="q10" value="4" data-answer-text="Interested"><label for="q10_4">Interested</label>
+                        <input type="radio" id="q10_3" name="q10" value="3" data-answer-text="Neutral"><label for="q10_3">Neutral</label>
+                        <input type="radio" id="q10_2" name="q10" value="2" data-answer-text="Not Very Interested"><label for="q10_2">Not Very Interested</label>
+                        <input type="radio" id="q10_1" name="q10" value="1" data-answer-text="I'm not sure"><label for="q10_1">I'm not sure</label>
                     </div>
                 </div>
                 
-                <div class="question-block">
+                <div class="question-block" data-q-num="11">
                     <p class="question-text">11. How interested are you in mastering AI assistants (like ChatGPT or Copilot) to become more productive in your work or learning?</p>
-                    <p class="hint">Using these tools effectively is a key skill called <a href="#" title="Learn more about AI Literacy">AI Literacy</a>.</p>
+                    <p class="hint">Using these tools effectively is a key skill called <a href="#" title="Learn more about AI Literacy" onclick="return false;">AI Literacy</a>.</p>
                     <div class="options-container">
-                        <input type="radio" id="q11_5" name="q11" value="5"><label for="q11_5">Strongly Interested</label>
-                        <input type="radio" id="q11_4" name="q11" value="4"><label for="q11_4">Interested</label>
-                        <input type="radio" id="q11_3" name="q11" value="3"><label for="q11_3">Neutral</label>
-                        <input type="radio" id="q11_2" name="q11" value="2"><label for="q11_2">Not Very Interested</label>
-                        <input type="radio" id="q11_1" name="q11" value="1"><label for="q11_1">I'm not sure</label>
+                        <input type="radio" id="q11_5" name="q11" value="5" data-answer-text="Strongly Interested"><label for="q11_5">Strongly Interested</label>
+                        <input type="radio" id="q11_4" name="q11" value="4" data-answer-text="Interested"><label for="q11_4">Interested</label>
+                        <input type="radio" id="q11_3" name="q11" value="3" data-answer-text="Neutral"><label for="q11_3">Neutral</label>
+                        <input type="radio" id="q11_2" name="q11" value="2" data-answer-text="Not Very Interested"><label for="q11_2">Not Very Interested</label>
+                        <input type="radio" id="q11_1" name="q11" value="1" data-answer-text="I'm not sure"><label for="q11_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="12">
                     <p class="question-text">12. How interested are you in building the 'plumbing' (the systems) that collects and moves huge amounts of data reliably?</p>
-                    <p class="hint">This is the job of a <a href="#" title="Learn more about Data Engineers">Data Engineer</a>, making sure data is clean and available.</p>
+                    <p class="hint">This is the job of a <a href="#" title="Learn more about Data Engineers" onclick="return false;">Data Engineer</a>, making sure data is clean and available.</p>
                     <div class="options-container">
-                        <input type="radio" id="q12_5" name="q12" value="5"><label for="q12_5">Strongly Interested</label>
-                        <input type="radio" id="q12_4" name="q12" value="4"><label for="q12_4">Interested</label>
-                        <input type="radio" id="q12_3" name="q12" value="3"><label for="q12_3">Neutral</label>
-                        <input type="radio" id="q12_2" name="q12" value="2"><label for="q12_2">Not Very Interested</label>
-                        <input type="radio" id="q12_1" name="q12" value="1"><label for="q12_1">I'm not sure</label>
+                        <input type="radio" id="q12_5" name="q12" value="5" data-answer-text="Strongly Interested"><label for="q12_5">Strongly Interested</label>
+                        <input type="radio" id="q12_4" name="q12" value="4" data-answer-text="Interested"><label for="q12_4">Interested</label>
+                        <input type="radio" id="q12_3" name="q12" value="3" data-answer-text="Neutral"><label for="q12_3">Neutral</label>
+                        <input type="radio" id="q12_2" name="q12" value="2" data-answer-text="Not Very Interested"><label for="q12_2">Not Very Interested</label>
+                        <input type="radio" id="q12_1" name="q12" value="1" data-answer-text="I'm not sure"><label for="q12_1">I'm not sure</label>
                     </div>
                 </div>
             </fieldset>
@@ -375,51 +457,51 @@
             <fieldset>
                 <legend>📊 Section 4: Learning Style & Goals</legend>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="13">
                     <p class="question-text">13. How interested are you in learning by *doing* and building hands-on projects (e.g., your own sales dashboard)?</p>
-                    <p class="hint">This is a <a href="#" title="Learn more about Project-Based Learning">project-based</a> learning style, common for technical roles.</p>
+                    <p class="hint">This is a <a href="#" title="Learn more about Project-Based Learning" onclick="return false;">project-based</a> learning style, common for technical roles.</p>
                     <div class="options-container">
-                        <input type="radio" id="q13_5" name="q13" value="5"><label for="q13_5">Strongly Interested</label>
-                        <input type="radio" id="q13_4" name="q13" value="4"><label for="q13_4">Interested</label>
-                        <input type="radio" id="q13_3" name="q13" value="3"><label for="q13_3">Neutral</label>
-                        <input type="radio" id="q13_2" name="q13" value="2"><label for="q13_2">Not Very Interested</label>
-                        <input type="radio" id="q13_1" name="q13" value="1"><label for="q13_1">I'm not sure</label>
+                        <input type="radio" id="q13_5" name="q13" value="5" data-answer-text="Strongly Interested"><label for="q13_5">Strongly Interested</label>
+                        <input type="radio" id="q13_4" name="q13" value="4" data-answer-text="Interested"><label for="q13_4">Interested</label>
+                        <input type="radio" id="q13_3" name="q13" value="3" data-answer-text="Neutral"><label for="q13_3">Neutral</label>
+                        <input type="radio" id="q13_2" name="q13" value="2" data-answer-text="Not Very Interested"><label for="q13_2">Not Very Interested</label>
+                        <input type="radio" id="q13_1" name="q13" value="1" data-answer-text="I'm not sure"><label for="q13_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="14">
                     <p class="question-text">14. Are you more interested in the 'big picture' strategy of *how* data can solve a problem, rather than coding the solution yourself?</p>
-                    <p class="hint">This mindset fits <a href="#" title="Learn more about Product Managers">Product Manager</a> or "Data Strategist" roles.</p>
+                    <p class="hint">This mindset fits <a href="#" title="Learn more about Product Managers" onclick="return false;">Product Manager</a> or "Data Strategist" roles.</p>
                     <div class="options-container">
-                        <input type="radio" id="q14_5" name="q14" value="5"><label for="q14_5">Strongly Interested</label>
-                        <input type="radio" id="q14_4" name="q14" value="4"><label for="q14_4">Interested</label>
-                        <input type="radio" id="q14_3" name="q14" value="3"><label for="q14_3">Neutral</label>
-                        <input type="radio" id="q14_2" name="q14" value="2"><label for="q14_2">Not Very Interested</label>
-                        <input type="radio" id="q14_1" name="q14" value="1"><label for="q14_1">I'm not sure</label>
+                        <input type="radio" id="q14_5" name="q14" value="5" data-answer-text="Strongly Interested"><label for="q14_5">Strongly Interested</label>
+                        <input type="radio" id="q14_4" name="q14" value="4" data-answer-text="Interested"><label for="q14_4">Interested</label>
+                        <input type="radio" id="q14_3" name="q14" value="3" data-answer-text="Neutral"><label for="q14_3">Neutral</label>
+                        <input type="radio" id="q14_2" name="q14" value="2" data-answer-text="Not Very Interested"><label for="q14_2">Not Very Interested</label>
+                        <input type="radio" id="q14_1" name="q14" value="1" data-answer-text="I'm not sure"><label for="q14_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="15">
                     <p class="question-text">15. Is your main goal to use *any* tool (AI, Excel, or code) to solve practical business problems and get a clear answer?</p>
-                    <p class="hint">This is a "problem-solver" mindset, great for <a href="#" title="Learn more about Data Analysts">Data Analysts</a> and "AI Specialists."</p>
+                    <p class="hint">This is a "problem-solver" mindset, great for <a href="#" title="Learn more about Data Analysts" onclick="return false;">Data Analysts</a> and "AI Specialists."</p>
                     <div class="options-container">
-                        <input type="radio" id="q15_5" name="q15" value="5"><label for="q15_5">Strongly Interested</label>
-                        <input type="radio" id="q15_4" name="q15" value="4"><label for="q15_4">Interested</label>
-                        <input type="radio" id="q15_3" name="q15" value="3"><label for="q15_3">Neutral</label>
-                        <input type="radio" id="q15_2" name="q15" value="2"><label for="q15_2">Not Very Interested</label>
-                        <input type="radio" id="q15_1" name="q15" value="1"><label for="q15_1">I'm not sure</label>
+                        <input type="radio" id="q15_5" name="q15" value="5" data-answer-text="Strongly Interested"><label for="q15_5">Strongly Interested</label>
+                        <input type="radio" id="q15_4" name="q15" value="4" data-answer-text="Interested"><label for="q15_4">Interested</label>
+                        <input type="radio" id="q15_3" name="q15" value="3" data-answer-text="Neutral"><label for="q15_3">Neutral</label>
+                        <input type="radio" id="q15_2" name="q15" value="2" data-answer-text="Not Very Interested"><label for="q15_2">Not Very Interested</label>
+                        <input type="radio" id="q15_1" name="q15" value="1" data-answer-text="I'm not sure"><label for="q15_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="16">
                     <p class="question-text">16. How interested are you in thinking about how AI and data will change different jobs and industries in the future?</p>
-                    <p class="hint">This strategic thinking is key for "Analysts," "Consultants," and <a href="#" title="Learn more about AI Policy">AI Policy</a> roles.</p>
+                    <p class="hint">This strategic thinking is key for "Analysts," "Consultants," and <a href="#" title="Learn more about AI Policy" onclick="return false;">AI Policy</a> roles.</p>
                     <div class="options-container">
-                        <input type="radio" id="q16_5" name="q16" value="5"><label for="q16_5">Strongly Interested</label>
-                        <input type="radio" id="q16_4" name="q16" value="4"><label for="q16_4">Interested</label>
-                        <input type="radio" id="q16_3" name="q16" value="3"><label for="q16_3">Neutral</label>
-                        <input type="radio" id="q16_2" name="q16" value="2"><label for="q16_2">Not Very Interested</label>
-                        <input type="radio" id="q16_1" name="q16" value="1"><label for="q16_1">I'm not sure</label>
+                        <input type="radio" id="q16_5" name="q16" value="5" data-answer-text="Strongly Interested"><label for="q16_5">Strongly Interested</label>
+                        <input type="radio" id="q16_4" name="q16" value="4" data-answer-text="Interested"><label for="q16_4">Interested</label>
+                        <input type="radio" id="q16_3" name="q16" value="3" data-answer-text="Neutral"><label for="q16_3">Neutral</label>
+                        <input type="radio" id="q16_2" name="q16" value="2" data-answer-text="Not Very Interested"><label for="q16_2">Not Very Interested</label>
+                        <input type="radio" id="q16_1" name="q16" value="1" data-answer-text="I'm not sure"><label for="q16_1">I'm not sure</label>
                     </div>
                 </div>
             </fieldset>
@@ -427,51 +509,51 @@
             <fieldset>
                 <legend>🚀 Section 5: Future Aspirations</legend>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="17">
                     <p class="question-text">17. How interested are you in *leading a team* that uses data to make smart business decisions?</p>
                     <p class="hint"><strong>Example roles:</strong> Analytics Manager, Data-driven Product Manager.</p>
                     <div class="options-container">
-                        <input type="radio" id="q17_5" name="q17" value="5"><label for="q17_5">Strongly Interested</label>
-                        <input type="radio" id="q17_4" name="q17" value="4"><label for="q17_4">Interested</label>
-                        <input type="radio" id="q17_3" name="q17" value="3"><label for="q17_3">Neutral</label>
-                        <input type="radio" id="q17_2" name="q17" value="2"><label for="q17_2">Not Very Interested</label>
-                        <input type="radio" id="q17_1" name="q17" value="1"><label for="q17_1">I'm not sure</label>
+                        <input type="radio" id="q17_5" name="q17" value="5" data-answer-text="Strongly Interested"><label for="q17_5">Strongly Interested</label>
+                        <input type="radio" id="q17_4" name="q17" value="4" data-answer-text="Interested"><label for="q17_4">Interested</label>
+                        <input type="radio" id="q17_3" name="q17" value="3" data-answer-text="Neutral"><label for="q17_3">Neutral</label>
+                        <input type="radio" id="q17_2" name="q17" value="2" data-answer-text="Not Very Interested"><label for="q17_2">Not Very Interested</label>
+                        <input type="radio" id="q17_1" name="q17" value="1" data-answer-text="I'm not sure"><label for="q17_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="18">
                     <p class="question-text">18. How interested are you in *building and training* the complex AI models from scratch (like the ones that power ChatGPT)?</p>
-                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Machine Learning Engineers">Machine Learning Engineer</a>, AI Research Scientist.</p>
+                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Machine Learning Engineers" onclick="return false;">Machine Learning Engineer</a>, AI Research Scientist.</p>
                     <div class="options-container">
-                        <input type="radio" id="q18_5" name="q18" value="5"><label for="q18_5">Strongly Interested</label>
-                        <input type="radio" id="q18_4" name="q18" value="4"><label for="q18_4">Interested</label>
-                        <input type="radio" id="q18_3" name="q18" value="3"><label for="q18_3">Neutral</label>
-                        <input type="radio" id="q18_2" name="q18" value="2"><label for="q18_2">Not Very Interested</label>
-                        <input type="radio" id="q18_1" name="q18" value="1"><label for="q18_1">I'm not sure</label>
+                        <input type="radio" id="q18_5" name="q18" value="5" data-answer-text="Strongly Interested"><label for="q18_5">Strongly Interested</label>
+                        <input type="radio" id="q18_4" name="q18" value="4" data-answer-text="Interested"><label for="q18_4">Interested</label>
+                        <input type="radio" id="q18_3" name="q18" value="3" data-answer-text="Neutral"><label for="q18_3">Neutral</label>
+                        <input type="radio" id="q18_2" name="q18" value="2" data-answer-text="Not Very Interested"><label for="q18_2">Not Very Interested</label>
+                        <input type="radio" id="q18_1" name="q18" value="1" data-answer-text="I'm not sure"><label for="q18_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="19">
                     <p class="question-text">19. How interested are you in *designing the massive systems* that handle data for companies like YouTube or TikTok?</p>
-                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Engineers">Data Engineer</a>, Cloud Engineer.</p>
+                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Engineers" onclick="return false;">Data Engineer</a>, Cloud Engineer.</p>
                     <div class="options-container">
-                        <input type="radio" id="q19_5" name="q19" value="5"><label for="q19_5">Strongly Interested</label>
-                        <input type="radio" id="q19_4" name="q19" value="4"><label for="q19_4">Interested</label>
-                        <input type="radio" id="q19_3" name="q19" value="3"><label for="q19_3">Neutral</label>
-                        <input type="radio" id="q19_2" name="q19" value="2"><label for="q19_2">Not Very Interested</label>
-                        <input type="radio" id="q19_1" name="q19" value="1"><label for="q19_1">I'm not sure</label>
+                        <input type="radio" id="q19_5" name="q19" value="5" data-answer-text="Strongly Interested"><label for="q19_5">Strongly Interested</label>
+                        <input type="radio" id="q19_4" name="q19" value="4" data-answer-text="Interested"><label for="q19_4">Interested</label>
+                        <input type="radio" id="q19_3" name="q19" value="3" data-answer-text="Neutral"><label for="q19_3">Neutral</label>
+                        <input type="radio" id="q19_2" name="q19" value="2" data-answer-text="Not Very Interested"><label for="q19_2">Not Very Interested</label>
+                        <input type="radio" id="q19_1" name="q19" value="1" data-answer-text="I'm not sure"><label for="q19_1">I'm not sure</label>
                     </div>
                 </div>
 
-                <div class="question-block">
+                <div class="question-block" data-q-num="20">
                     <p class="question-text">20. How interested are you in *translating complex data* into simple stories and visuals (dashboards) that anyone can understand?</p>
-                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Analysts">Data Analyst</a>, Business Intelligence (BI) Developer.</p>
+                    <p class="hint"><strong>Example roles:</strong> <a href="#" title="Learn more about Data Analysts" onclick="return false;">Data Analyst</a>, Business Intelligence (BI) Developer.</p>
                     <div class="options-container">
-                        <input type="radio" id="q20_5" name="q20" value="5"><label for="q20_5">Strongly Interested</label>
-                        <input type="radio" id="q20_4" name="q20" value="4"><label for="q20_4">Interested</label>
-                        <input type="radio" id="q20_3" name="q20" value="3"><label for="q20_3">Neutral</label>
-                        <input type="radio" id="q20_2" name="q20" value="2"><label for="q20_2">Not Very Interested</label>
-                        <input type="radio" id="q20_1" name="q20" value="1"><label for="q20_1">I'm not sure</label>
+                        <input type="radio" id="q20_5" name="q20" value="5" data-answer-text="Strongly Interested"><label for="q20_5">Strongly Interested</label>
+                        <input type="radio" id="q20_4" name="q20" value="4" data-answer-text="Interested"><label for="q20_4">Interested</label>
+                        <input type="radio" id="q20_3" name="q20" value="3" data-answer-text="Neutral"><label for="q20_3">Neutral</label>
+                        <input type="radio" id="q20_2" name="q20" value="2" data-answer-text="Not Very Interested"><label for="q20_2">Not Very Interested</label>
+                        <input type="radio" id="q20_1" name="q20" value="1" data-answer-text="I'm not sure"><label for="q20_1">I'm not sure</label>
                     </div>
                 </div>
             </fieldset>
@@ -481,7 +563,16 @@
         </form>
 
         <div id="results">
-            <p>Your results will appear here...</p>
+            <div id="results-content">
+                <p><strong>Thank you for completing the quiz!</strong></p>
+                <p>Your personalized career report is ready. You can save your results below.</p>
+                <p><em>(Next step: Implement the scoring logic in JavaScript to show a personalized report here!)</em></p>
+            </div>
+            
+            <div class="results-actions">
+                <button id="printButton" class="result-button print">Print Results (as PDF)</button>
+                <button id="downloadButton" class="result-button download">Download Answers (.txt)</button>
+            </div>
         </div>
 
     </div>
@@ -505,43 +596,85 @@
 
         // Handle form submission
         form.addEventListener('submit', function(event) {
-            // Prevent the form from actually submitting
-            event.preventDefault(); 
+            event.preventDefault(); // Prevent the form from reloading the page
             
+            // Check if all questions are answered
+            const answeredQuestions = new Set(
+                Array.from(document.querySelectorAll('input[type="radio"]:checked'))
+                     .map(radio => radio.name)
+            ).size;
+
+            if (answeredQuestions < totalQuestions) {
+                alert('Please answer all 20 questions before submitting.');
+                return;
+            }
+
             // --- SCORING LOGIC GOES HERE ---
             // This is where you would build the logic from your "Result Mapping"
+            // See the README.md for a "How to Contribute" guide on this section.
             //
-            // Example Logic:
+            // Example:
             // const scores = { analyst: 0, engineer: 0, scientist: 0, strategist: 0 };
             // const formData = new FormData(form);
-            //
-            // // Get scores (1-5)
-            // const q1_score = parseInt(formData.get('q1')) || 0;
-            // const q18_score = parseInt(formData.get('q18')) || 0;
-            // const q19_score = parseInt(formData.get('q19')) || 0;
             // const q20_score = parseInt(formData.get('q20')) || 0;
-            //
-            // // Add points to roles
-            // if (q1_score > 3) scores.scientist += q1_score;
-            // if (q18_score > 3) scores.scientist += q18_score;
-            // if (q19_score > 3) scores.engineer += q19_score;
             // if (q20_score > 3) scores.analyst += q20_score;
-            // ... (and so on for all 20 questions)
+            // ... etc. ...
             //
-            // Then, sort the scores and find the top 3 paths.
+            // Then, you would update the #results-content.innerHTML with the findings
             // ---------------------------------
 
-            // For this demo, we'll just show a placeholder message.
+            // Show the results section
             const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `
-                <p><strong>Thank you for completing the quiz!</strong></p>
-                <p>Based on your answers, your personalized career report will appear here.</p>
-                <p><em>(Scoring logic needs to be implemented in the JavaScript.)</em></p>
-            `;
             resultsDiv.style.display = 'block';
 
             // Scroll to the results
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // --- NEW: Event Listeners for Save/Print Buttons ---
+        // We add these outside the submit handler, but they only work on
+        // buttons that are now visible.
+        
+        document.getElementById('printButton').addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            let textContent = "AI & Data Career Fit Quiz Results\n";
+            textContent += "==================================\n\n";
+            
+            // Loop through all questions to get text and answer
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qName = `q${i}`;
+                
+                // Find the question text
+                const qBlock = document.querySelector(`.question-block[data-q-num="${i}"]`);
+                const qText = qBlock.querySelector('.question-text').innerText;
+                
+                // Find the selected answer's text
+                const selectedRadio = document.querySelector(`input[name="${qName}"]:checked`);
+                let answerText = "No answer";
+                if (selectedRadio) {
+                    // Get the text from the 'data-answer-text' attribute we added
+                    answerText = selectedRadio.getAttribute('data-answer-text');
+                }
+                
+                textContent += `Question ${i}: ${qText}\n`;
+                textContent += `Your Answer: ${answerText}\n\n`;
+            }
+            
+            // Create and download the file
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const a = document.createElement('a');
+            const timestamp = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+            
+            a.href = URL.createObjectURL(blob);
+            a.download = `ai_quiz_results_${timestamp}.txt`;
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
         });
     </script>
 
