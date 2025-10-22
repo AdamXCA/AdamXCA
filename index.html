@@ -758,6 +758,13 @@
                         <input type="email" id="user_email" name="email" placeholder="e.g., jane.doe@example.com" required>
                     </div>
                 </fieldset>
+                
+                <input type="hidden" name="result_1_name" id="result_1_name">
+                <input type="hidden" name="result_1_desc" id="result_1_desc">
+                <input type="hidden" name="result_2_name" id="result_2_name">
+                <input type="hidden" name="result_2_desc" id="result_2_desc">
+                <input type="hidden" name="result_3_name" id="result_3_name">
+                <input type="hidden" name="result_3_desc" id="result_3_desc">
 
                 <button type="submit" class="submit-button" id="submitButton">Submit & Get My Report</button>
                 <p id="submission-status">Submitting your answers...</p>
@@ -799,6 +806,8 @@
             }
         }
 
+        // --- THIS FUNCTION IS NOW SIMPLER ---
+        // It only updates the visuals (progress bar and nav dots)
         function updateTracking() {
             const checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
             const answeredNames = new Set(Array.from(checkedRadios).map(radio => radio.name));
@@ -810,10 +819,6 @@
                 const dot = document.getElementById(`nav-dot-${i}`);
                 if (answeredNames.has(`q${i}`)) {
                     dot.classList.add('answered');
-                    // NEW: Update hidden field for Formspree
-                    const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
-                    const textValue = checkedRadio.getAttribute('data-answer-text');
-                    document.getElementById(`answer_text_q${i}`).value = textValue;
                 } else {
                     dot.classList.remove('answered');
                 }
@@ -825,13 +830,28 @@
             return answeredNames;
         }
 
-        document.addEventListener('DOMContentLoaded', initQuizNav);
-        form.addEventListener('change', updateTracking);
+        // --- NEW FUNCTION ---
+        // This populates all hidden fields.
+        // It's called ONLY on submit.
+        function populateHiddenFields() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checkedRadio) {
+                    const textValue = checkedRadio.getAttribute('data-answer-text');
+                    document.getElementById(`answer_text_q${i}`).value = textValue;
+                }
+            }
+        }
 
-        // --- NEW SUBMIT HANDLER ---
+        document.addEventListener('DOMContentLoaded', initQuizNav);
+        // updateTracking is now ONLY called on change.
+        form.addEventListener('change', updateTracking); 
+
+        // --- UPDATED SUBMIT HANDLER ---
         form.addEventListener('submit', async function(event) {
             event.preventDefault(); 
             
+            // 1. Run validation
             const answeredNames = updateTracking(); 
             
             if (answeredNames.size < totalQuestions) {
@@ -854,75 +874,71 @@
                 return; 
             }
 
-            // Disable button and show status
+            // 2. --- THIS IS THE FIX ---
+            // Populate all hidden fields *before* creating FormData
+            populateHiddenFields();
+
+            // 3. Disable button and show status
             submitButton.disabled = true;
             submitButton.innerText = 'Submitting...';
             submissionStatus.style.display = 'block';
 
-            // --- Send data to Formspree in background ---
-            try {
-                const formData = new FormData(form);
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Form submission failed');
-                }
-                
-                // Formspree submission was successful
-                submissionStatus.innerText = 'Email report sent! Generating your on-screen results...';
-                
-            } catch (error) {
-                console.error('Formspree error:', error);
-                submissionStatus.innerText = 'Email failed to send, but here are your results.';
-                // We can still proceed to show results even if email fails
-            }
-
-            // --- SCORING LOGIC (runs after Formspree) ---
-            const scores = {
-                dataAnalyst: 0,
-                mlEngineer: 0,
-                dataEngineer: 0,
-                aiStrategist: 0
-            };
-
+            // 4. Score the quiz (we need this data for the email)
             const roleDetails = {
                 dataAnalyst: { name: 'Data Analyst', desc: 'You like finding insights and telling stories with data. You focus on business problems and practical answers using tools like Excel, SQL, and Power BI.' },
                 mlEngineer: { name: 'Machine Learning Engineer', desc: 'You are curious about building the AI models themselves. You enjoy coding (like Python) and are interested in how Netflix or ChatGPT work under the hood.' },
                 dataEngineer: { name: 'Data Engineer', desc: 'You are interested in building the "plumbing" and massive systems that collect and move data reliably, like the infrastructure for self-driving cars or TikTok.' },
                 aiStrategist: { name: 'AI Strategist / Product Manager', desc: 'You focus on the "big picture," ethics, and business strategy. You enjoy thinking about how AI can solve problems and impact jobs, leading teams to make better decisions.' }
             };
-
-            const formData = new FormData(form);
-            const getScore = (qName) => parseInt(formData.get(qName)) || 0;
-
+            
+            const localFormData = new FormData(form); // Use a local var for scoring
+            const getScore = (qName) => parseInt(localFormData.get(qName)) || 0;
+            
+            const scores = { dataAnalyst: 0, mlEngineer: 0, dataEngineer: 0, aiStrategist: 0 };
             scores.dataAnalyst += getScore('q2') + getScore('q9') + getScore('q15') + getScore('q20');
             scores.mlEngineer += getScore('q1') + getScore('q5') + getScore('q6') + getScore('q7') + getScore('q18');
             scores.dataEngineer += getScore('q3') + getScore('q12') + getScore('q19');
             scores.aiStrategist += getScore('q8') + getScore('q14') + getScore('q16') + getScore('q17');
-            
             const codingScore = getScore('q10');
             scores.dataAnalyst += codingScore; scores.mlEngineer += codingScore; scores.dataEngineer += codingScore;
-
             const projectScore = getScore('q13');
             scores.dataAnalyst += projectScore; scores.mlEngineer += projectScore; scores.dataEngineer += projectScore;
-
             scores.aiStrategist += getScore('q11');
             const socialGoodScore = getScore('q4');
             scores.dataAnalyst += socialGoodScore; scores.aiStrategist += socialGoodScore;
 
             const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
-            // --- Generate HTML for results ---
+            // 5. Populate hidden fields for the RESULTS
+            document.getElementById('result_1_name').value = roleDetails[sortedScores[0][0]].name;
+            document.getElementById('result_1_desc').value = roleDetails[sortedScores[0][0]].desc;
+            document.getElementById('result_2_name').value = roleDetails[sortedScores[1][0]].name;
+            document.getElementById('result_2_desc').value = roleDetails[sortedScores[1][0]].desc;
+            document.getElementById('result_3_name').value = roleDetails[sortedScores[2][0]].name;
+            document.getElementById('result_3_desc').value = roleDetails[sortedScores[2][0]].desc;
+
+            // 6. Send data to Formspree in background
+            try {
+                const finalFormData = new FormData(form); // Create new FormData *after* all hidden fields are set
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: finalFormData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!response.ok) throw new Error('Form submission failed');
+                
+                submissionStatus.innerText = 'Email report sent! Generating your on-screen results...';
+                
+            } catch (error) {
+                console.error('Formspree error:', error);
+                submissionStatus.innerText = 'Email failed to send, but here are your results.';
+            }
+
+            // 7. Generate HTML for results page
             const resultsContent = document.getElementById('results-content');
-            const userName = formData.get('user_name');
-<div>&nbsp;</div>
-            const userEmail = formData.get('email');
+            const userName = localFormData.get('user_name');
+            const userEmail = localFormData.get('email');
 
             let resultsHTML = '';
             if (userName || userEmail) {
@@ -944,9 +960,9 @@
             
             resultsContent.innerHTML = resultsHTML;
 
-            // --- Show results and hide form ---
-            form.style.display = 'none'; // Hide the form
-            submissionStatus.style.display = 'none'; // Hide status message
+            // 8. Show results and hide form
+            form.style.display = 'none'; 
+            submissionStatus.style.display = 'none'; 
             const resultsDiv = document.getElementById('results');
             resultsDiv.style.display = 'block';
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -981,11 +997,8 @@
                 const qBlock = document.getElementById(`q-block-${i}`);
                 const qText = qBlock.querySelector('.question-text').innerText;
                 
-                const selectedRadio = document.querySelector(`input[name="${qName}"]:checked`);
-                let answerText = "No answer";
-                if (selectedRadio) {
-                    answerText = selectedRadio.getAttribute('data-answer-text');
-                }
+                // Get answer text from the hidden field, which we know is populated
+                let answerText = document.getElementById(`answer_text_q${i}`).value || "No answer";
                 
                 textContent += `${qText}\n`;
                 textContent += `Your Answer: ${answerText}\n\n`;
