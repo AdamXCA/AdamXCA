@@ -143,33 +143,7 @@
             width: 100%;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        .form-group input[type="text"],
-        .form-group input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            background-color: var(--option-bg);
-            color: var(--text-primary);
-            border-radius: 6px;
-            font-size: 1em;
-            box-sizing: border-box; 
-        }
-        .form-group input[type="text"]:focus,
-        .form-group input[type="email"]:focus {
-            border-color: var(--primary-blue);
-            outline: none;
-            box-shadow: 0 0 10px rgba(0, 122, 255, 0.3);
-        }
-
+        /* REMOVED .form-group styles as they are no longer needed */
 
         .question-block {
             margin-bottom: 30px;
@@ -312,15 +286,7 @@
             background: #2f4a3e;
         }
 
-        .user-info-print {
-            background: var(--option-bg);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-        .user-info-print p {
-            margin: 0 0 5px 0;
-        }
+        /* REMOVED .user-info-print styles */
 
         .results-actions {
             display: flex;
@@ -353,13 +319,12 @@
             background-color: var(--primary-blue-dark);
         }
 
-        /* Message for submission */
         #submission-status {
             text-align: center;
             color: var(--text-secondary);
             font-style: italic;
             margin-top: 20px;
-            display: none; /* Hidden by default */
+            display: none; 
         }
 
 
@@ -434,13 +399,10 @@
             .instructions {
                 color: #444;
             }
-            #results-content, .result-card, .result-card h3, .result-card p, .user-info-print {
+            #results-content, .result-card, .result-card h3, .result-card p { /* Removed .user-info-print */
                 color: #000;
                 background: #f9f9f9;
                 border-color: #ccc;
-            }
-            .user-info-print {
-                border: 1px solid #ccc;
             }
             #results-content h2 {
                 color: #000;
@@ -465,7 +427,7 @@
                 <div id="progressBar"></div>
             </div>
 
-            <form id="careerQuizForm" action="https://formspree.io/f/xnngkbal" method="POST">
+            <form id="careerQuizForm"> 
                 
                 <fieldset>
                     <legend>🧩 Section 1: Real-World Scenarios</legend>
@@ -480,8 +442,7 @@
                             <input type="radio" id="q1_2" name="q1" value="2" data-answer-text="Not Very Interested"><label for="q1_2">Not Very Interested</label>
                             <input type="radio" id="q1_1" name="q1" value="1" data-answer-text="I'm not sure"><label for="q1_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q1" id="answer_text_q1">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-2" data-q-num="2">
                         <p class="question-text">2. How interesting do you find analyzing business data (like sales or marketing reports) to help a company improve performance?</p>
@@ -493,8 +454,7 @@
                             <input type="radio" id="q2_2" name="q2" value="2" data-answer-text="Not Very Interested"><label for="q2_2">Not Very Interested</label>
                             <input type="radio" id="q2_1" name="q2" value="1" data-answer-text="I'm not sure"><label for="q2_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q2" id="answer_text_q2">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-3" data-q-num="3">
                         <p class="question-text">3. How interesting is the technology behind a self-driving car (like a Tesla) using sensors and AI to make real-time decisions?</p>
@@ -506,8 +466,7 @@
                             <input type="radio" id="q3_2" name="q3" value="2" data-answer-text="Not Very Interested"><label for="q3_2">Not Very Interested</label>
                             <input type="radio" id="q3_1" name="q3" value="1" data-answer-text="I'm not sure"><label for="q3_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q3" id="answer_text_q3">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-4" data-q-num="4">
                         <p class="question-text">4. How interesting do you find exploring public data (like health stats or city budgets) to find patterns that could help society?</p>
@@ -519,8 +478,7 @@
                             <input type="radio" id="q4_2" name="q4" value="2" data-answer-text="Not Very Interested"><label for="q4_2">Not Very Interested</label>
                             <input type="radio" id="q4_1" name="q4" value="1" data-answer-text="I'm not sure"><label for="q4_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q4" id="answer_text_q4">
-                    </div>
+                        </div>
                 </fieldset>
 
                 <fieldset>
@@ -536,8 +494,7 @@
                             <input type="radio" id="q5_2" name="q5" value="2" data-answer-text="Not Very Interested"><label for="q5_2">Not Very Interested</label>
                             <input type="radio" id="q5_1" name="q5" value="1" data-answer-text="I'm not sure"><label for="q5_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q5" id="answer_text_q5">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-6" data-q-num="6">
                         <p class="question-text">6. How interesting do you find AI that can create brand-new images, logos, or music from a text description (like Midjourney or DALL-E)?</p>
@@ -549,8 +506,7 @@
                             <input type="radio" id="q6_2" name="q6" value="2" data-answer-text="Not Very Interested"><label for="q6_2">Not Very Interested</label>
                             <input type="radio" id="q6_1" name="q6" value="1" data-answer-text="I'm not sure"><label for="q6_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q6" id="answer_text_q6">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-7" data-q-num="7">
                         <p class="question-text">7. How interested are you in using data to predict future trends (e.g., what Amazon will sell most of next month)?</p>
@@ -562,8 +518,7 @@
                             <input type="radio" id="q7_2" name="q7" value="2" data-answer-text="Not Very Interested"><label for="q7_2">Not Very Interested</label>
                             <input type="radio" id="q7_1" name="q7" value="1" data-answer-text="I'm not sure"><label for="q7_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q7" id="answer_text_q7">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-8" data-q-num="8">
                         <p class="question-text">8. How interested are you in discussing the rules and ethics of AI (e.g., fairness, privacy, and its impact on jobs)?</p>
@@ -575,8 +530,7 @@
                             <input type="radio" id="q8_2" name="q8" value="2" data-answer-text="Not Very Interested"><label for="q8_2">Not Very Interested</label>
                             <input type="radio" id="q8_1" name="q8" value="1" data-answer-text="I'm not sure"><label for="q8_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q8" id="answer_text_q8">
-                    </div>
+                        </div>
                 </fieldset>
 
                 <fieldset>
@@ -592,8 +546,7 @@
                             <input type="radio" id="q9_2" name="q9" value="2" data-answer-text="Not Very Interested"><label for="q9_2">Not Very Interested</label>
                             <input type="radio" id="q9_1" name="q9" value="1" data-answer-text="I'm not sure"><label for="q9_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q9" id="answer_text_q9">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-10" data-q-num="10">
                         <p class="question-text">10. How interested are you in learning a coding language (like Python or SQL) to manage and analyze large amounts of data?</p>
@@ -605,8 +558,7 @@
                             <input type="radio" id="q10_2" name="q10" value="2" data-answer-text="Not Very Interested"><label for="q10_2">Not Very Interested</label>
                             <input type="radio" id="q10_1" name="q10" value="1" data-answer-text="I'm not sure"><label for="q10_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q10" id="answer_text_q10">
-                    </div>
+                        </div>
                     
                     <div class="question-block" id="q-block-11" data-q-num="11">
                         <p class="question-text">11. How interested are you in mastering AI assistants (like ChatGPT or Copilot) to become more productive in your work or learning?</p>
@@ -618,8 +570,7 @@
                             <input type="radio" id="q11_2" name="q11" value="2" data-answer-text="Not Very Interested"><label for="q11_2">Not Very Interested</label>
                             <input type="radio" id="q11_1" name="q11" value="1" data-answer-text="I'm not sure"><label for="q11_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q11" id="answer_text_q11">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-12" data-q-num="12">
                         <p class="question-text">12. How interested are you in building the 'plumbing' (the systems) that collects and moves huge amounts of data reliably?</p>
@@ -631,8 +582,7 @@
                             <input type="radio" id="q12_2" name="q12" value="2" data-answer-text="Not Very Interested"><label for="q12_2">Not Very Interested</label>
                             <input type="radio" id="q12_1" name="q12" value="1" data-answer-text="I'm not sure"><label for="q12_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q12" id="answer_text_q12">
-                    </div>
+                        </div>
                 </fieldset>
 
                 <fieldset>
@@ -648,8 +598,7 @@
                             <input type="radio" id="q13_2" name="q13" value="2" data-answer-text="Not Very Interested"><label for="q13_2">Not Very Interested</label>
                             <input type="radio" id="q13_1" name="q13" value="1" data-answer-text="I'm not sure"><label for="q13_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q13" id="answer_text_q13">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-14" data-q-num="14">
                         <p class="question-text">14. Are you more interested in the 'big picture' strategy of *how* data can solve a problem, rather than coding the solution yourself?</p>
@@ -661,8 +610,7 @@
                             <input type="radio" id="q14_2" name="q14" value="2" data-answer-text="Not Very Interested"><label for="q14_2">Not Very Interested</label>
                             <input type="radio" id="q14_1" name="q14" value="1" data-answer-text="I'm not sure"><label for="q14_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q14" id="answer_text_q14">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-15" data-q-num="15">
                         <p class="question-text">15. Is your main goal to use *any* tool (AI, Excel, or code) to solve practical business problems and get a clear answer?</p>
@@ -674,8 +622,7 @@
                             <input type="radio" id="q15_2" name="q15" value="2" data-answer-text="Not Very Interested"><label for="q15_2">Not Very Interested</label>
                             <input type="radio" id="q15_1" name="q15" value="1" data-answer-text="I'm not sure"><label for="q15_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q15" id="answer_text_q15">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-16" data-q-num="16">
                         <p class="question-text">16. How interested are you in thinking about how AI and data will change different jobs and industries in the future?</p>
@@ -687,8 +634,7 @@
                             <input type="radio" id="q16_2" name="q16" value="2" data-answer-text="Not Very Interested"><label for="q16_2">Not Very Interested</label>
                             <input type="radio" id="q16_1" name="q16" value="1" data-answer-text="I'm not sure"><label for="q16_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q16" id="answer_text_q16">
-                    </div>
+                        </div>
                 </fieldset>
 
                 <fieldset>
@@ -704,8 +650,7 @@
                             <input type="radio" id="q17_2" name="q17" value="2" data-answer-text="Not Very Interested"><label for="q17_2">Not Very Interested</label>
                             <input type="radio" id="q17_1" name="q17" value="1" data-answer-text="I'm not sure"><label for="q17_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q17" id="answer_text_q17">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-18" data-q-num="18">
                         <p class="question-text">18. How interested are you in *building and training* the complex AI models from scratch (like the ones that power ChatGPT)?</p>
@@ -717,8 +662,7 @@
                             <input type="radio" id="q18_2" name="q18" value="2" data-answer-text="Not Very Interested"><label for="q18_2">Not Very Interested</label>
                             <input type="radio" id="q18_1" name="q18" value="1" data-answer-text="I'm not sure"><label for="q18_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q18" id="answer_text_q18">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-19" data-q-num="19">
                         <p class="question-text">19. How interested are you in *designing the massive systems* that handle data for companies like YouTube or TikTok?</p>
@@ -730,8 +674,7 @@
                             <input type="radio" id="q19_2" name="q19" value="2" data-answer-text="Not Very Interested"><label for="q19_2">Not Very Interested</label>
                             <input type="radio" id="q19_1" name="q19" value="1" data-answer-text="I'm not sure"><label for="q19_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q19" id="answer_text_q19">
-                    </div>
+                        </div>
 
                     <div class="question-block" id="q-block-20" data-q-num="20">
                         <p class="question-text">20. How interested are you in *translating complex data* into simple stories and visuals (dashboards) that anyone can understand?</p>
@@ -743,33 +686,11 @@
                             <input type="radio" id="q20_2" name="q20" value="2" data-answer-text="Not Very Interested"><label for="q20_2">Not Very Interested</label>
                             <input type="radio" id="q20_1" name="q20" value="1" data-answer-text="I'm not sure"><label for="q20_1">I'm not sure</label>
                         </div>
-                        <input type="hidden" name="answer_text_q20" id="answer_text_q20">
-                    </div>
+                        </div>
                 </fieldset>
 
-                <fieldset>
-                    <legend>👤 Your Information to Receive Report</legend>
-                    <div class="form-group">
-                        <label for="user_name">Name (Optional)</label>
-                        <input type="text" id="user_name" name="user_name" placeholder="e.g., Jane Doe">
-                    </div>
-                    <div class="form-group">
-                        <label for="user_email">Email (Required for report)</label>
-                        <input type="email" id="user_email" name="email" placeholder="e.g., jane.doe@example.com" required>
-                    </div>
-                </fieldset>
-                
-                <input type="hidden" name="result_1_name" id="result_1_name">
-                <input type="hidden" name="result_1_desc" id="result_1_desc">
-                <input type="hidden" name="result_2_name" id="result_2_name">
-                <input type="hidden" name="result_2_desc" id="result_2_desc">
-                <input type="hidden" name="result_3_name" id="result_3_name">
-                <input type="hidden" name="result_3_desc" id="result_3_desc">
-
-                <button type="submit" class="submit-button" id="submitButton">Submit & Get My Report</button>
-                <p id="submission-status">Submitting your answers...</p>
-
-            </form>
+                <button type="submit" class="submit-button" id="submitButton">See My Career Matches</button>
+                </form>
 
             <div id="results">
                 <div id="results-content"></div> 
@@ -786,7 +707,7 @@
         const totalQuestions = 20;
         const navContainer = document.getElementById('quiz-nav');
         const submitButton = document.getElementById('submitButton');
-        const submissionStatus = document.getElementById('submission-status');
+        // REMOVED submissionStatus variable
 
         function initQuizNav() {
             for (let i = 1; i <= totalQuestions; i++) {
@@ -806,8 +727,6 @@
             }
         }
 
-        // --- THIS FUNCTION IS NOW SIMPLER ---
-        // It only updates the visuals (progress bar and nav dots)
         function updateTracking() {
             const checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
             const answeredNames = new Set(Array.from(checkedRadios).map(radio => radio.name));
@@ -830,25 +749,13 @@
             return answeredNames;
         }
 
-        // --- NEW FUNCTION ---
-        // This populates all hidden fields.
-        // It's called ONLY on submit.
-        function populateHiddenFields() {
-            for (let i = 1; i <= totalQuestions; i++) {
-                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
-                if (checkedRadio) {
-                    const textValue = checkedRadio.getAttribute('data-answer-text');
-                    document.getElementById(`answer_text_q${i}`).value = textValue;
-                }
-            }
-        }
+        // REMOVED populateHiddenFields function
 
         document.addEventListener('DOMContentLoaded', initQuizNav);
-        // updateTracking is now ONLY called on change.
         form.addEventListener('change', updateTracking); 
 
-        // --- UPDATED SUBMIT HANDLER ---
-        form.addEventListener('submit', async function(event) {
+        // --- SIMPLIFIED SUBMIT HANDLER ---
+        form.addEventListener('submit', function(event) {
             event.preventDefault(); 
             
             // 1. Run validation
@@ -874,16 +781,11 @@
                 return; 
             }
 
-            // 2. --- THIS IS THE FIX ---
-            // Populate all hidden fields *before* creating FormData
-            populateHiddenFields();
-
-            // 3. Disable button and show status
+            // 2. Disable button (optional, but good UX)
             submitButton.disabled = true;
-            submitButton.innerText = 'Submitting...';
-            submissionStatus.style.display = 'block';
+            submitButton.innerText = 'Calculating Results...';
 
-            // 4. Score the quiz (we need this data for the email)
+            // 3. Score the quiz
             const roleDetails = {
                 dataAnalyst: { name: 'Data Analyst', desc: 'You like finding insights and telling stories with data. You focus on business problems and practical answers using tools like Excel, SQL, and Power BI.' },
                 mlEngineer: { name: 'Machine Learning Engineer', desc: 'You are curious about building the AI models themselves. You enjoy coding (like Python) and are interested in how Netflix or ChatGPT work under the hood.' },
@@ -891,7 +793,7 @@
                 aiStrategist: { name: 'AI Strategist / Product Manager', desc: 'You focus on the "big picture," ethics, and business strategy. You enjoy thinking about how AI can solve problems and impact jobs, leading teams to make better decisions.' }
             };
             
-            const localFormData = new FormData(form); // Use a local var for scoring
+            const localFormData = new FormData(form); 
             const getScore = (qName) => parseInt(localFormData.get(qName)) || 0;
             
             const scores = { dataAnalyst: 0, mlEngineer: 0, dataEngineer: 0, aiStrategist: 0 };
@@ -909,44 +811,12 @@
 
             const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
-            // 5. Populate hidden fields for the RESULTS
-            document.getElementById('result_1_name').value = roleDetails[sortedScores[0][0]].name;
-            document.getElementById('result_1_desc').value = roleDetails[sortedScores[0][0]].desc;
-            document.getElementById('result_2_name').value = roleDetails[sortedScores[1][0]].name;
-            document.getElementById('result_2_desc').value = roleDetails[sortedScores[1][0]].desc;
-            document.getElementById('result_3_name').value = roleDetails[sortedScores[2][0]].name;
-            document.getElementById('result_3_desc').value = roleDetails[sortedScores[2][0]].desc;
-
-            // 6. Send data to Formspree in background
-            try {
-                const finalFormData = new FormData(form); // Create new FormData *after* all hidden fields are set
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: finalFormData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (!response.ok) throw new Error('Form submission failed');
-                
-                submissionStatus.innerText = 'Email report sent! Generating your on-screen results...';
-                
-            } catch (error) {
-                console.error('Formspree error:', error);
-                submissionStatus.innerText = 'Email failed to send, but here are your results.';
-            }
-
-            // 7. Generate HTML for results page
+            // 4. Generate HTML for results page
             const resultsContent = document.getElementById('results-content');
-            const userName = localFormData.get('user_name');
-            const userEmail = localFormData.get('email');
+            // REMOVED userName and userEmail variables
 
             let resultsHTML = '';
-            if (userName || userEmail) {
-                resultsHTML += '<div class="user-info-print">';
-                if (userName) resultsHTML += `<p><strong>Name:</strong> ${userName}</p>`;
-                if (userEmail) resultsHTML += `<p><strong>Email:</strong> ${userEmail}</p>`;
-                resultsHTML += '</div>';
-            }
+            // REMOVED user info print block
             resultsHTML += '<h2>Your Top Career Matches</h2>';
             for (const [key, score] of sortedScores) {
                 resultsHTML += `
@@ -956,13 +826,13 @@
                     </div>
                 `;
             }
-            resultsHTML += '<p style="margin-top: 25px; text-align: center; color: var(--text-secondary);">You can now save your full report (including all your answers) below.</p>';
+            resultsHTML += '<p style="margin-top: 25px; text-align: center; color: var(--text-secondary);">You can save your full report (including all your answers) below.</p>';
             
             resultsContent.innerHTML = resultsHTML;
 
-            // 8. Show results and hide form
+            // 5. Show results and hide form
             form.style.display = 'none'; 
-            submissionStatus.style.display = 'none'; 
+            // REMOVED submissionStatus hide
             const resultsDiv = document.getElementById('results');
             resultsDiv.style.display = 'block';
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -977,12 +847,8 @@
             let textContent = "AI & Data Career Fit Quiz Results\n";
             textContent += "==================================\n\n";
 
-            const formData = new FormData(form);
-            const userName = formData.get('user_name') || 'Not provided';
-            const userEmail = formData.get('email') || 'Not provided';
-            textContent += `Name: ${userName}\n`;
-            textContent += `Email: ${userEmail}\n\n`;
-
+            // REMOVED Name/Email from download text
+            
             textContent += "--- Your Top Matches ---\n";
             const resultsHTML = document.getElementById('results-content').querySelectorAll('.result-card');
             resultsHTML.forEach(card => {
@@ -997,8 +863,12 @@
                 const qBlock = document.getElementById(`q-block-${i}`);
                 const qText = qBlock.querySelector('.question-text').innerText;
                 
-                // Get answer text from the hidden field, which we know is populated
-                let answerText = document.getElementById(`answer_text_q${i}`).value || "No answer";
+                const selectedRadio = document.querySelector(`input[name="${qName}"]:checked`);
+                let answerText = "No answer";
+                 if (selectedRadio) {
+                    // Get text directly from the selected radio's data attribute
+                    answerText = selectedRadio.getAttribute('data-answer-text');
+                 }
                 
                 textContent += `${qText}\n`;
                 textContent += `Your Answer: ${answerText}\n\n`;
